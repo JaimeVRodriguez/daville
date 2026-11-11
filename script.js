@@ -26,12 +26,12 @@
   };
   let cart = store.get();
 
-  const art = p => `<svg viewBox="0 0 88 100" aria-hidden="true"><defs><linearGradient id="g${p.id}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${p.a}"/><stop offset="1" stop-color="${p.b}"/></linearGradient></defs>${SHAPES[p.shape].replaceAll('url(#g)', `url(#g${p.id})`)}</svg>`;
+  const art = p => `<svg viewBox="0 0 88 100" aria-hidden="true"><defs><linearGradient id="g${p.id}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e9e5d9"/><stop offset="1" stop-color="#7d796d"/></linearGradient></defs>${SHAPES[p.shape].replaceAll('url(#g)', `url(#g${p.id})`)}</svg>`;
 
   function render(filter = 'all') {
     $('#products').innerHTML = PRODUCTS.filter(p => filter === 'all' || p.cat === filter).map((p, i) => `
       <article class="card" style="animation-delay:${i * 60}ms">
-        <div class="thumb" style="background:radial-gradient(circle at 50% 40%,${p.a}33,#16161a 70%)">
+        <div class="thumb">
           <span class="badge">${p.badge}</span>${art(p)}
         </div>
         <div class="info">
@@ -56,7 +56,7 @@
     $('#cartTotal').textContent = money(items.reduce((s, x) => s + x.p.price * x.q, 0));
     $('#cartList').innerHTML = items.length ? items.map(({ p, q }) => `
       <li class="line">
-        <div class="sw" style="background:linear-gradient(135deg,${p.a},${p.b})"></div>
+        <div class="sw"></div>
         <div><b>${p.name}</b><small>${money(p.price)}</small>
           <div class="qty"><button data-dec="${p.id}" aria-label="Decrease">−</button><span>${q}</span><button data-inc="${p.id}" aria-label="Increase">+</button></div></div>
         <strong>${money(p.price * q)}</strong>
